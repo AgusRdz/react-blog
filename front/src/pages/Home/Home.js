@@ -1,11 +1,9 @@
 import SuspenseLoader from 'components/SuspenseLoader/SuspenseLoader'
-import React, { lazy, Suspense, useEffect, useState } from 'react'
-
+import React, { Suspense, useEffect, useState } from 'react'
 import BotttomScrollListener from 'react-bottom-scroll-listener'
-const InfinitePosts = lazy(async () => {
-  await new Promise((resolve) => setTimeout(resolve, 2000))
-  return import('components/InfinitePosts')
-})
+import SuspenseResolver from 'utils/suspense-resolver'
+
+const InfinitePosts = SuspenseResolver('components/InfinitePosts')
 
 const DUMMY = [
   {
