@@ -1,1 +1,1 @@
-export { deafult } from './SuspenseLoader'
+export { default } from './SuspenseLoader'

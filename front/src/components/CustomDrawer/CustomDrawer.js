@@ -1,13 +1,12 @@
 import React from 'react'
-import { IconButton, Typography, useTheme } from '@material-ui/core'
+import { IconButton, useTheme } from '@material-ui/core'
 import Divider from '@material-ui/core/Divider'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
 import Drawer from '@material-ui/core/Drawer'
-import List from '@material-ui/core/List'
 import useStyles from './styles'
+import RecentPostsList from 'components/RecentPostsList'
+import TagsList from 'components/TagsList'
 
 const CustomDrawer = ({ onClose, open }) => {
   const classes = useStyles()
@@ -35,41 +34,9 @@ const CustomDrawer = ({ onClose, open }) => {
         </IconButton>
       </div>
       <Divider />
-      <Typography
-        variant="subtitle1"
-        component="span"
-        style={{
-          marginLeft: 15,
-          marginTop: 15
-        }}
-      >
-        Latest Posts
-      </Typography>
-      <List>
-        {['Blog 1', 'Blog 2', 'Blog 3', 'Blog 4'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
+      <RecentPostsList />
       <Divider />
-      <Typography
-        variant="subtitle1"
-        component="span"
-        style={{
-          marginLeft: 15,
-          marginTop: 15
-        }}
-      >
-        Tags
-      </Typography>
-      <List>
-        {['React', 'Node', 'Cloud', 'CSS', 'Tutorial'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
+      <TagsList />
     </Drawer>
   )
 }

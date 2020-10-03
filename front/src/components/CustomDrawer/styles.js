@@ -1,14 +1,14 @@
 import { makeStyles } from '@material-ui/core'
 
-const drawerWidth = 440
+const DRAWER_WIDTH = 340
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
-    width: drawerWidth,
+    width: DRAWER_WIDTH,
     flexShrink: 0
   },
   drawerPaper: {
-    width: drawerWidth
+    width: DRAWER_WIDTH
   },
   drawerHeader: {
     display: 'flex',
