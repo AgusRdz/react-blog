@@ -9,6 +9,7 @@ import {
 import { Menu } from '@material-ui/icons'
 import clsx from 'clsx'
 import useStyles from './styles'
+import ScrollTop from 'components/ScrollTop'
 
 const NavBar = ({ onDrawerOpen, open }) => {
   const classes = useStyles()
@@ -39,7 +40,7 @@ const NavBar = ({ onDrawerOpen, open }) => {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Toolbar id="back-to-top-anchor" />
+      <ScrollTop />
     </div>
   )
 }
