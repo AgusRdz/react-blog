@@ -101,6 +101,7 @@
 
 - [ ] install **lint-staged**: `npx mrm lint-staged`
 - [ ] create **jsconfig.json**
+
   ```json
   {
     "compilerOptions": {
@@ -108,3 +109,11 @@
     }
   }
   ```
+
+  ## features
+
+  - **Home**
+
+    - [ ] Display all blogs using an infinite scroll and a Masonry effect to provide a trendy layout to display each post as a card.
+    - [ ] Provide a button in the upper right or upper left corner to open a sidebar to display the most recent blogs and a section to apply a filter based on a tag
+    - [ ] Provide a button at the bottom right to return to the top of the page, this button should only be shown when the scroll is 100px from the top of the page
