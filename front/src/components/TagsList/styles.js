@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 15,
     marginTop: 15,
     marginBottom: 15
+  },
+  centered: {
+    textAlign: 'center'
   }
 }))
 

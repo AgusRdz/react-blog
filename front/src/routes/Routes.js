@@ -4,6 +4,7 @@ import BlogLayout from 'components/Layouts/BlogLayout'
 // import DashboardLayout from 'components/Layouts/DashboardLayout'
 // import Dashboard from 'pages/Dashboard'
 import Home from 'pages/Home'
+import Blog from 'pages/Blog'
 
 const Routes = () => {
   return (
@@ -13,6 +14,7 @@ const Routes = () => {
         <BlogLayout>
           <Switch>
             <Route path="/" exact component={Home} />
+            <Route path="/blog/:slug" component={Blog} />
           </Switch>
         </BlogLayout>
       </Route>

@@ -9,6 +9,7 @@ import {
 import Muuri from 'muuri'
 import useStyles from './styles'
 import ImagesLoaded from 'imagesloaded'
+import { Link } from 'react-router-dom'
 
 const InfinitePosts = ({ posts }) => {
   const classes = useStyles()
@@ -78,16 +79,18 @@ const InfinitePosts = ({ posts }) => {
 
   return (
     <div ref={gridRef} className={classes.grid}>
-      {items.map(({ id, title, coverImage, text }) => (
+      {items.map(({ id, title, coverImage, text, slug }) => (
         <div key={id} data-id={id}>
           <Fade in={true} unmountOnExit timeout={2000}>
-            <Card style={{ paddingBottom: 10 }}>
-              <CardHeader title={title} />
-              <CardMedia component="div">
-                <img src={coverImage} alt={title} />
-              </CardMedia>
-              <CardContent className={classes.ellipsis}>{text}</CardContent>
-            </Card>
+            <Link to={`/blog/${slug}`} style={{ textDecoration: 'none' }}>
+              <Card style={{ paddingBottom: 10 }}>
+                <CardHeader title={title} />
+                <CardMedia component="div">
+                  <img src={coverImage} alt={title} />
+                </CardMedia>
+                <CardContent className={classes.ellipsis}>{text}</CardContent>
+              </Card>
+            </Link>
           </Fade>
         </div>
       ))}
