@@ -1,5 +1,5 @@
-import SuspenseLoader from 'components/SuspenseLoader'
 import React, { Suspense, useEffect, useState } from 'react'
+import SuspenseLoader from 'components/SuspenseLoader'
 import SuspenseResolver from 'utils/suspense-resolver'
 const BlogContent = SuspenseResolver('components/BlogContent')
 

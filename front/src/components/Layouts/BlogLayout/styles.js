@@ -23,7 +23,9 @@ const useStyles = makeStyles((theme) => ({
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
-    })
+    }),
+    minHeight: '100vh',
+    paddingBottom: 300
   },
   contentShift: {
     transition: theme.transitions.create('margin', {
