@@ -125,3 +125,7 @@
   - **Blog**
 
     - [ ] Display each blog using the an slug rather than the id
+    - [ ] Use Lazy and Suspense to display the blog content
+
+  - **Footer**
+    - [ ] Add a simple footer at the bottom, always it will displayed at the bottom no cares the page content

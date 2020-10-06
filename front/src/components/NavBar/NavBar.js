@@ -10,6 +10,7 @@ import { Menu } from '@material-ui/icons'
 import clsx from 'clsx'
 import useStyles from './styles'
 import ScrollTop from 'components/ScrollTop'
+import { Link } from 'react-router-dom'
 
 const NavBar = ({ onDrawerOpen, open }) => {
   const classes = useStyles()
@@ -27,7 +28,7 @@ const NavBar = ({ onDrawerOpen, open }) => {
       >
         <Toolbar>
           <Typography variant="h6" noWrap className={classes.title}>
-            AgusLog
+            <Link to="/">AgusLog</Link>
           </Typography>
           <IconButton
             color="inherit"

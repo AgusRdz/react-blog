@@ -21,7 +21,11 @@ const useStyles = makeStyles((theme) => ({
     marginRight: drawerWidth
   },
   title: {
-    flexGrow: 1
+    flexGrow: 1,
+    '& a': {
+      textDecoration: 'none',
+      color: '#fff'
+    }
   },
   hide: {
     display: 'none'
