@@ -1,4 +1,4 @@
-import SuspenseLoader from 'components/SuspenseLoader/SuspenseLoader'
+import Loader from 'components/Loader'
 import React, { Suspense, useEffect, useState } from 'react'
 import BotttomScrollListener from 'react-bottom-scroll-listener'
 import SuspenseResolver from 'utils/suspense-resolver'
@@ -198,7 +198,7 @@ const Home = () => {
   }
   return (
     <BotttomScrollListener onBottom={handleOnBottom}>
-      <Suspense fallback={<SuspenseLoader />}>
+      <Suspense fallback={<Loader />}>
         <InfinitePosts posts={posts} />
       </Suspense>
     </BotttomScrollListener>

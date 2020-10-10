@@ -6,7 +6,7 @@ import clsx from 'clsx'
 const TagsList = ({ centered }) => {
   const classes = useStyles()
 
-  const handleClick = (label) => (e) => {
+  const handleClick = (label) => () => {
     console.log(label)
   }
 
@@ -14,16 +14,11 @@ const TagsList = ({ centered }) => {
     <Fragment>
       <div
         className={clsx({
-          [classes.centered]: centered
+          [classes.centered]: centered,
+          [classes.headerMargins]: true
         })}
       >
-        <Typography
-          variant="h6"
-          component="span"
-          className={clsx({
-            [classes.header]: true
-          })}
-        >
+        <Typography variant="h6" component="span" className={classes.header}>
           Tags
         </Typography>
       </div>

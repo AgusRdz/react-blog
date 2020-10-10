@@ -5,6 +5,7 @@ import BlogLayout from 'components/Layouts/BlogLayout'
 // import Dashboard from 'pages/Dashboard'
 import Home from 'pages/Home'
 import Blog from 'pages/Blog'
+import Whoami from 'pages/Whoami'
 
 const Routes = () => {
   return (
@@ -14,7 +15,8 @@ const Routes = () => {
         <BlogLayout>
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/blog/:slug" component={Blog} />
+            <Route path="/blog/:slug" exact component={Blog} />
+            <Route path="/whoami" exact component={Whoami} />
           </Switch>
         </BlogLayout>
       </Route>

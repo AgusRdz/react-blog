@@ -16,6 +16,10 @@ const useStyles = makeStyles((theme) => ({
   },
   centered: {
     textAlign: 'center'
+  },
+  headerMargins: {
+    marginTop: 15,
+    marginBottom: 15
   }
 }))
 

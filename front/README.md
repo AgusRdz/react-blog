@@ -134,3 +134,7 @@
   - **About**
 
     - [ ] Add about page
+
+  - **404**
+
+    - [ ] Add a 404 page

@@ -15,7 +15,11 @@ const BlogLayout = ({ children }) => {
   useEffect(() => {
     if (!ref) return
 
-    ref.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    const delay = setTimeout(() => {
+      window.scrollTo({ behavior: 'smooth', top: 0, left: 0 })
+    }, 500)
+
+    return () => clearTimeout(delay)
   }, [])
 
   const handleDrawerOpen = () => {

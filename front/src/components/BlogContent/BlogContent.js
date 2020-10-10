@@ -5,20 +5,11 @@ import {
   Fade,
   Grid,
   Paper,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core'
 import TagsList from 'components/TagsList'
 import { Link } from 'react-router-dom'
-
-const useStyles = makeStyles(() => ({
-  breadcrumb: {
-    width: 'fit-content',
-    float: 'right',
-    marginBottom: 15,
-    '& a': { textDecoration: 'none' }
-  }
-}))
+import useStyles from './styles'
 
 const BlogContent = ({ title = 'title' }) => {
   const classes = useStyles()
