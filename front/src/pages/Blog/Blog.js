@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useState } from 'react'
-import SuspenseLoader from 'components/SuspenseLoader'
+import Loader from 'components/Loader'
 import SuspenseResolver from 'utils/suspense-resolver'
 const BlogContent = SuspenseResolver('components/BlogContent')
 
@@ -11,7 +11,7 @@ const Blog = ({ match }) => {
   }, [match.params.slug])
 
   return (
-    <Suspense fallback={<SuspenseLoader />}>
+    <Suspense fallback={<Loader />}>
       <BlogContent slug={slug} />
     </Suspense>
   )

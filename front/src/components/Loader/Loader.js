@@ -2,7 +2,7 @@ import React from 'react'
 import { PuffLoader } from 'react-spinners'
 import useStyles from './styles'
 
-const SuspenseLoader = () => {
+const Loader = () => {
   const classes = useStyles()
 
   return (
@@ -14,4 +14,4 @@ const SuspenseLoader = () => {
   )
 }
 
-export default React.memo(SuspenseLoader)
+export default React.memo(Loader)

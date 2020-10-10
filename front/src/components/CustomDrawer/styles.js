@@ -31,6 +31,13 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen
     }),
     marginRight: 0
+  },
+  header: {
+    marginLeft: 15,
+    marginTop: 15,
+    '& a': {
+      textDecoration: 'none'
+    }
   }
 }))
 
