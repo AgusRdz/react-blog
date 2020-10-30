@@ -9,7 +9,7 @@ import {
   Link
 } from '@material-ui/core'
 import { GitHub, LinkedIn } from '@material-ui/icons'
-import useStyles from './styles'
+import useStyles from './useStyles'
 import ToolsSet from 'components/ToolsSet'
 
 const Whoami = () => {

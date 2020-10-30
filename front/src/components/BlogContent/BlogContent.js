@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core'
 import TagsList from 'components/TagsList'
 import { Link } from 'react-router-dom'
-import useStyles from './styles'
+import useStyles from './useStyles'
 
 const BlogContent = ({ title = 'title' }) => {
   const classes = useStyles()
@@ -26,10 +26,10 @@ const BlogContent = ({ title = 'title' }) => {
             </Breadcrumbs>
           </Grid>
           <Grid item xs={12}>
-            <Paper elevation={8} style={{ minHeight: '100vh' }}>
+            <Paper elevation={8} className={classes.paper}>
               <Box padding={2}>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} style={{ textAlign: 'center' }}>
+                  <Grid item xs={12} className={classes.image}>
                     <img src="https://picsum.photos/1152/517" alt="" />
                   </Grid>
                   <Grid item xs={12}>

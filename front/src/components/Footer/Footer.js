@@ -1,6 +1,6 @@
 import React from 'react'
 import Emoji from 'react-emoji-render'
-import useStyles from './styles'
+import useStyles from './useStyles'
 
 const Footer = () => {
   const classes = useStyles()

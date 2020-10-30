@@ -7,7 +7,7 @@ import {
   Typography
 } from '@material-ui/core'
 import { LibraryBooks } from '@material-ui/icons'
-import useStyles from './styles'
+import useStyles from './useStyles'
 
 const RecentPostsList = () => {
   const classes = useStyles()

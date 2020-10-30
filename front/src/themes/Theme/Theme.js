@@ -1,6 +1,6 @@
 const { createMuiTheme } = require('@material-ui/core')
 
-const Theme = createMuiTheme({
+const Blog = createMuiTheme({
   palette: {
     primary: {
       main: '#000'
@@ -11,4 +11,4 @@ const Theme = createMuiTheme({
   }
 })
 
-export default Theme
+export default Blog

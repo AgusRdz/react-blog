@@ -1,10 +1,10 @@
 import React, { useRef, useEffect } from 'react'
 import { Container, CssBaseline, ThemeProvider } from '@material-ui/core'
 import clsx from 'clsx'
-import Theme from 'themes'
+import Theme from 'themes/Theme'
 import NavBar from 'components/NavBar'
 import CustomDrawer from 'components/CustomDrawer'
-import useStyles from './styles'
+import useStyles from './useStyles'
 import Footer from 'components/Footer'
 
 const BlogLayout = ({ children }) => {

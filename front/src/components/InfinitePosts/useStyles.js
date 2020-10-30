@@ -28,6 +28,9 @@ const useStyles = makeStyles(() => ({
     display: '-webkit-box',
     '-webkitLineClamp': 8,
     '-webkitBoxOrient': 'vertical'
+  },
+  link: {
+    textDecoration: 'none'
   }
 }))
 

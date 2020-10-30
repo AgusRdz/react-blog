@@ -5,7 +5,15 @@ const useStyles = makeStyles(() => ({
     width: 'fit-content',
     float: 'right',
     marginBottom: 15,
-    '& a': { textDecoration: 'none' }
+    '& a': {
+      textDecoration: 'none'
+    }
+  },
+  paper: {
+    minHeight: '100vh'
+  },
+  image: {
+    textAlign: 'center'
   }
 }))
 
