@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core'
 import { Menu } from '@material-ui/icons'
 import clsx from 'clsx'
-import useStyles from './styles'
+import useStyles from './useStyles'
 import ScrollTop from 'components/ScrollTop'
 import { Link } from 'react-router-dom'
 

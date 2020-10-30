@@ -1,17 +1,17 @@
 import React from 'react'
-import { PuffLoader } from 'react-spinners'
+import LoginForm from 'components/Forms/LoginForm'
 import useStyles from './useStyles'
 
-const Loader = () => {
+const Login = () => {
   const classes = useStyles()
 
   return (
     <div className={classes.container}>
-      <div className={classes.loader}>
-        <PuffLoader loading />
+      <div className={classes.form}>
+        <LoginForm />
       </div>
     </div>
   )
 }
 
-export default React.memo(Loader)
+export default Login

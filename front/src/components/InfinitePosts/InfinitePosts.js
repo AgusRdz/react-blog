@@ -7,7 +7,7 @@ import {
   Fade
 } from '@material-ui/core'
 import Muuri from 'muuri'
-import useStyles from './styles'
+import useStyles from './useStyles'
 import ImagesLoaded from 'imagesloaded'
 import { Link } from 'react-router-dom'
 
@@ -82,7 +82,7 @@ const InfinitePosts = ({ posts }) => {
       {items.map(({ id, title, coverImage, text, slug }) => (
         <div key={id} data-id={id}>
           <Fade in={true} unmountOnExit timeout={2000}>
-            <Link to={`/blog/${slug}`} style={{ textDecoration: 'none' }}>
+            <Link to={`/blog/${slug}`} className={classes.link}>
               <Card style={{ paddingBottom: 10 }}>
                 <CardHeader title={title} />
                 <CardMedia component="div">

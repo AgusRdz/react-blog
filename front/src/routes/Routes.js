@@ -1,33 +1,40 @@
 import React from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Switch } from 'react-router-dom'
 import BlogLayout from 'components/Layouts/BlogLayout'
-// import DashboardLayout from 'components/Layouts/DashboardLayout'
-// import Dashboard from 'pages/Dashboard'
+import DashboardLayout from 'components/Layouts/DashboardLayout'
 import Home from 'pages/Home'
 import Blog from 'pages/Blog'
 import Whoami from 'pages/Whoami'
+import PageNotFound from 'pages/PageNotFound'
+import Login from 'pages/Login'
+import NotFoundLayout from 'components/Layouts/NotFoundLayout/NotFoundLayout'
+import AppRouter from 'components/AppRouter'
 
 const Routes = () => {
   return (
     <BrowserRouter>
-      {/* <Route path='/login' component={Login} /> */}
-      <Route>
-        <BlogLayout>
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/blog/:slug" exact component={Blog} />
-            <Route path="/whoami" exact component={Whoami} />
-          </Switch>
-        </BlogLayout>
-      </Route>
-
-      {/* <Route path="/dashboard/:path?" exact>
-        <DashboardLayout>
-          <Switch>
-            <Route path="/dashboard" exact component={Dashboard} />
-          </Switch>
-        </DashboardLayout>
-      </Route> */}
+      <Switch>
+        <AppRouter path="/" exact component={Home} layout={BlogLayout} />
+        <AppRouter
+          path="/blog/:slug"
+          exact
+          component={Blog}
+          layout={BlogLayout}
+        />
+        <AppRouter
+          path="/whoami"
+          exact
+          component={Whoami}
+          layout={BlogLayout}
+        />
+        <AppRouter
+          path="/dashboard/login"
+          exact
+          component={Login}
+          layout={DashboardLayout}
+        />
+        <AppRouter path="*" component={PageNotFound} layout={NotFoundLayout} />
+      </Switch>
     </BrowserRouter>
   )
 }

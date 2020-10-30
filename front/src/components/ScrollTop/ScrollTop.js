@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react'
 import { Fab, useScrollTrigger, Zoom, Toolbar } from '@material-ui/core'
 import { KeyboardArrowUp } from '@material-ui/icons'
-import useStyles from './styles'
+import useStyles from './useStyles'
 
 const ScrollTop = () => {
   const classes = useStyles()

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { Chip, Typography } from '@material-ui/core'
-import useStyles from './styles'
+import useStyles from './useStyles'
 import clsx from 'clsx'
 
 const TagsList = ({ centered }) => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Fade, Grid } from '@material-ui/core'
-import useStyles from './styles'
+import useStyles from './useStyles'
 
 const ToolsSet = () => {
   const classes = useStyles()
