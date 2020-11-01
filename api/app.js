@@ -1,20 +1,28 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+require('dotenv').config()
+const PORT = process.env.PORT || 3000
+const BASE_URL = `/api/${process.env.VERSION || 'v1'}/`
+const express = require('express')
+const cookieParser = require('cookie-parser')
+const logger = require('morgan')
+const app = express()
+const fs = require('fs')
+require('./src/models/index')
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+app.use(logger('dev'))
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(cookieParser())
 
-var app = express();
+fs.readdir('./src/routes', (err, files) => {
+  if (err) console.error(err)
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+  files.forEach((file) => {
+    app.use(BASE_URL, require(`./src/routes/${file}`))
+  })
+})
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.listen(PORT, () => {
+  console.log(`App running on port: ${PORT}`)
+})
 
-module.exports = app;
+module.exports = app
