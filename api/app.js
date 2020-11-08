@@ -6,12 +6,14 @@ const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const app = express()
 const fs = require('fs')
+const { responseEnhancer } = require('express-response-formatter')
 require('./src/models/index')
 
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
+app.use(responseEnhancer())
 
 fs.readdir('./src/routes', (err, files) => {
   if (err) console.error(err)
