@@ -1023,6 +1023,11 @@ execa@^4.1.0:
     signal-exit "^3.0.2"
     strip-final-newline "^2.0.0"
 
+express-response-formatter@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/express-response-formatter/-/express-response-formatter-2.0.2.tgz#f501fa5f73b8a059d936f903c7b2cd7e56c30f23"
+  integrity sha512-n1bzauPa2lxJfYnL3aLRBogolpTG24LOVJE6BY3ZWD+3sOO6QT1Cgm5xqregotibpvARCCBt12lb6DP4m6ExZw==
+
 express@~4.16.1:
   version "4.16.4"
   resolved "https://registry.yarnpkg.com/express/-/express-4.16.4.tgz#fddef61926109e24c515ea97fd2f1bdbf62df12e"

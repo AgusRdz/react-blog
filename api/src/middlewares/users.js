@@ -1,5 +1,4 @@
 const Joi = require('joi')
-const { unprocessableEntity } = require('../handlers/responses')
 
 const schema = Joi.object({
   firstName: Joi.string().required(),
@@ -14,7 +13,7 @@ exports.create = (req, res, next) => {
   if (error) {
     const message = error.details.map((i) => i.message).join(',')
 
-    return unprocessableEntity(res, message)
+    return res.formatter.unprocess(message)
   }
 
   next()
