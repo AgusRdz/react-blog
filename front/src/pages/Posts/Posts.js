@@ -2,7 +2,7 @@ import React from 'react'
 import withAuth from 'hocs/WithAuth'
 import { Grid } from '@material-ui/core'
 
-const Dashboard = () => {
+const Posts = () => {
   return (
     <div>
       <Grid container spacing={3}>
@@ -23,4 +23,4 @@ const Dashboard = () => {
   )
 }
 
-export default withAuth(Dashboard)
+export default withAuth(Posts)
