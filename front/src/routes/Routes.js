@@ -11,6 +11,7 @@ import NotFoundLayout from 'components/Layouts/NotFoundLayout/NotFoundLayout'
 import AppRouter from 'components/AppRouter'
 import Dashboard from 'pages/Dashboard'
 import Posts from 'pages/Posts'
+import AuthLayout from 'components/Layouts/AuthLayout'
 
 const Routes = () => {
   return (
@@ -33,7 +34,7 @@ const Routes = () => {
           path="/dashboard/login"
           exact
           component={Login}
-          layout={DashboardLayout}
+          layout={AuthLayout}
         />
         <AppRouter
           path="/dashboard"
