@@ -1,8 +1,16 @@
 const { Blog } = require('../models/blog')
 
 exports.index = async (req, res) => {
+  const {
+    query: { page }
+  } = req
+  const limit = 10
+  const total = await Blog.countDocuments()
   const blogs = await Blog.find()
-  return res.formatter.ok({ blogs })
+    .limit(limit)
+    .skip(page * limit)
+
+  return res.formatter.ok({ blogs, total, page })
 }
 
 exports.store = async (req, res) => {

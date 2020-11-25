@@ -6,6 +6,7 @@ exports.login = async (req, res) => {
   const {
     body: { email, password }
   } = req
+  const invalidCredentials = { message: 'User or password does not match' }
 
   User.findOne({ email }, (err, user) => {
     if (err) {
@@ -15,15 +16,23 @@ exports.login = async (req, res) => {
     }
 
     if (!user) {
-      return res.formatter.unauthorized('User or password does not match')
+      return res.formatter.badRequest(invalidCredentials)
     }
 
     compare(password, user.password, function (err, result) {
-      if (err || !result)
-        return res.formatter.unauthorized('User or password does not match')
+      if (err || !result) return res.formatter.badRequest(invalidCredentials)
 
-      const token = jwt.sign({ user }, 'thisisaseed', { expiresIn: 3600 })
-      res.formatter.ok({ token, user })
+      const accessToken = jwt.sign({ user }, 'thisisaseed', { expiresIn: 3600 })
+      res.formatter.ok({ accessToken, user })
     })
   })
+}
+
+exports.tokenRefresh = async (req, res) => {
+  const {
+    body: { oldAccessToken }
+  } = req
+  const { user } = jwt.decode(oldAccessToken)
+  const accessToken = jwt.sign({ user }, 'thisisaseed', { expiresIn: 3600 })
+  res.formatter.ok({ accessToken })
 }

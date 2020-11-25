@@ -1,26 +1,9 @@
 import React from 'react'
 import withAuth from 'hocs/WithAuth'
-import { Grid } from '@material-ui/core'
+import AllPosts from 'components/Tables/AllPosts'
 
 const Posts = () => {
-  return (
-    <div>
-      <Grid container spacing={3}>
-        <Grid item lg={3} sm={6} xs={12}>
-          one
-        </Grid>
-        <Grid item lg={3} sm={6} xs={12}>
-          one
-        </Grid>
-        <Grid item lg={3} sm={6} xs={12}>
-          one
-        </Grid>
-        <Grid item lg={3} sm={6} xs={12}>
-          one
-        </Grid>
-      </Grid>
-    </div>
-  )
+  return <AllPosts />
 }
 
 export default withAuth(Posts)
