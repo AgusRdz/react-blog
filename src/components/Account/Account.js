@@ -9,6 +9,7 @@ import {
   MenuItem,
   Typography
 } from '@material-ui/core'
+import { useHistory } from 'react-router'
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -25,10 +26,16 @@ const Account = () => {
   const classes = useStyles()
   const ref = useRef(null)
   const [isOpen, setIsOpen] = useState(false)
+  const history = useHistory()
 
   const handleOpen = () => setIsOpen(() => true)
 
   const handleClose = () => setIsOpen(() => false)
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('session')
+    history.push('/dashboard/login')
+  }
 
   return (
     <Fragment>
@@ -58,7 +65,7 @@ const Account = () => {
         PaperProps={{ className: classes.popover }}
       >
         <MenuItem>Account</MenuItem>
-        <MenuItem>Logout</MenuItem>
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </Fragment>
   )
