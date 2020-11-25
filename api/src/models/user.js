@@ -1,24 +1,17 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const userSchema = new Schema({
-  name: {
+const userSchema = new Schema(
+  {
     firstName: String,
-    lastName: String
+    lastName: String,
+    email: {
+      type: String,
+      unique: true
+    },
+    password: String
   },
-  email: {
-    type: String,
-    unique: true
-  },
-  password: String,
-  createdAt: {
-    type: Date,
-    default: Date.now
-  },
-  updatedAt: {
-    type: Date,
-    default: null
-  }
-})
+  { timestamps: true }
+)
 userSchema.plugin(require('mongoose-bcrypt'))
 userSchema.plugin(require('mongoose-unique-validator'), {
   message: '{PATH} should be unique'

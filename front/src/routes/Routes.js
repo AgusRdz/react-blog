@@ -10,6 +10,8 @@ import Login from 'pages/Login'
 import NotFoundLayout from 'components/Layouts/NotFoundLayout/NotFoundLayout'
 import AppRouter from 'components/AppRouter'
 import Dashboard from 'pages/Dashboard'
+import Posts from 'pages/Posts'
+import AuthLayout from 'components/Layouts/AuthLayout'
 
 const Routes = () => {
   return (
@@ -32,12 +34,24 @@ const Routes = () => {
           path="/dashboard/login"
           exact
           component={Login}
-          layout={DashboardLayout}
+          layout={AuthLayout}
         />
         <AppRouter
           path="/dashboard"
           exact
           component={Dashboard}
+          layout={DashboardLayout}
+        />
+        <AppRouter
+          path="/dashboard/posts"
+          exact
+          component={Posts}
+          layout={DashboardLayout}
+        />
+        <AppRouter
+          path="/dashboard/posts/create"
+          exact
+          component={Posts}
           layout={DashboardLayout}
         />
         <AppRouter path="*" component={PageNotFound} layout={NotFoundLayout} />

@@ -46,10 +46,10 @@ const LoginForm = () => {
     const { data = null, error = null } = await Auth.login(form)
 
     if (error) {
-      addToast({ message: error, severity: 'error' })
+      addToast({ message: error.message, severity: 'error' })
       return
     }
-    setJwt(() => data.token)
+    setJwt(() => data.accessToken)
     setIsAuthenticated(() => true)
   }
 

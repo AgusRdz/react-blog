@@ -138,3 +138,12 @@
   - **404**
 
     - [ ] Add a 404 page
+
+  - **Login**
+
+    - [ ] Create the route `/dashboard/login`
+    - [ ] Use axios/fetch to consume the API, the API must return a JWT
+    - [ ] Create a HOC to validate when the user is a guest or exists a valid "session"
+
+  - **Dashboard**
+    - After login redirects to `/dashboard` and show a sidebar, navbar or both with the options to close the session and manage the posts (show all posts, create a new one, in this point you can use a static data just to make a demo)
