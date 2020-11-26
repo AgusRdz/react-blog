@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect, Fragment } from 'react'
 import {
   Card,
   CardContent,
@@ -10,6 +10,7 @@ import Muuri from 'muuri'
 import useStyles from './useStyles'
 import ImagesLoaded from 'imagesloaded'
 import { Link } from 'react-router-dom'
+import TimeForHumans from 'components/TimeForHumans'
 
 const InfinitePosts = ({ posts }) => {
   const classes = useStyles()
@@ -28,13 +29,13 @@ const InfinitePosts = ({ posts }) => {
           fillGaps: true
         },
         sortData: {
-          id: (item, element) => parseFloat(element.getAttribute('data-id'))
+          _id: (item, element) => parseFloat(element.getAttribute('data-id'))
         }
       })
 
       setGrid(() => muuri)
     }
-    setPostIDs(() => posts.map(({ id }) => id))
+    setPostIDs(() => posts.map(({ _id }) => _id))
     // eslint-disable-next-line
   }, [posts])
 
@@ -79,16 +80,30 @@ const InfinitePosts = ({ posts }) => {
 
   return (
     <div ref={gridRef} className={classes.grid}>
-      {items.map(({ id, title, coverImage, text, slug }) => (
-        <div key={id} data-id={id}>
+      {items.map(({ _id, title, cover, description, slug, updatedAt }) => (
+        <div key={_id} data-id={_id}>
           <Fade in={true} unmountOnExit timeout={2000}>
             <Link to={`/blog/${slug}`} className={classes.link}>
               <Card style={{ paddingBottom: 10 }}>
                 <CardHeader title={title} />
                 <CardMedia component="div">
-                  <img src={coverImage} alt={title} />
+                  <img
+                    src={
+                      cover
+                        ? `${process.env.REACT_APP_API_IMAGES_URL}${cover}`
+                        : '/images/not_found.png'
+                    }
+                    alt={title}
+                  />
                 </CardMedia>
-                <CardContent className={classes.ellipsis}>{text}</CardContent>
+                <CardContent className={classes.ellipsis}>
+                  <Fragment>
+                    <div>{description}</div>
+                    <div>
+                      By AgusRdz at <TimeForHumans date={updatedAt} />{' '}
+                    </div>
+                  </Fragment>
+                </CardContent>
               </Card>
             </Link>
           </Fade>

@@ -30,9 +30,7 @@ apiClient.interceptors.response.use(
       originalRequest._retry = true
       const { data } = await apiClient.post('/auth/token/refresh')
       sessionStorage.setItem('session', JSON.stringify(data.accessToken))
-      axios.defaults.headers.common[
-        'authorization'
-      ] = `Bearer ${data.accessToken}`
+      axios.defaults.headers.common.authorization = `Bearer ${data.accessToken}`
       return apiClient(originalRequest)
     }
 

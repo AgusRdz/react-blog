@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { Grid, Paper, TextField, Button, Typography } from '@material-ui/core'
 import useStyles from './useStyles'
-import { Auth } from 'services/api/auth'
+import { AuthService } from 'services/api/auth'
 import useSessionStorage from 'hooks/useSessionStorage'
 import { Redirect } from 'react-router-dom'
 import useAuth from 'hooks/useAuth'
@@ -43,7 +43,7 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const { data = null, error = null } = await Auth.login(form)
+    const { data = null, error = null } = await AuthService.login(form)
 
     if (error) {
       addToast({ message: error.message, severity: 'error' })
