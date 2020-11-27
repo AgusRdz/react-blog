@@ -30,7 +30,9 @@ const useStyles = makeStyles((theme) => ({
   contentContainer: {
     display: 'flex',
     flex: '1 1 auto',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    marginBottom: 25,
+    minHeight: '100%'
   },
   content: {
     flex: '1 1 auto',

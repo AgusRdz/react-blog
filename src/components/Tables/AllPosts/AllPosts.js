@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import {
+  Button,
   Card,
   CardHeader,
   Divider,
@@ -12,8 +13,10 @@ import {
   TableRow
 } from '@material-ui/core'
 import { BlogService } from 'services/api/blog'
+import { useHistory } from 'react-router'
 
 const AllPosts = () => {
+  const history = useHistory()
   const [blogs, setBlogs] = useState([])
   const [total, setTotal] = useState(0)
   const [page, setPage] = useState(0)
@@ -35,9 +38,18 @@ const AllPosts = () => {
 
   const handleChangePage = (event, newPage) => setPage(() => newPage)
 
+  const handleClick = () => history.push('/dashboard/posts/create')
+
   return (
     <Card>
-      <CardHeader title="Posts" />
+      <CardHeader
+        title="Posts"
+        action={
+          <Button color="primary" variant="contained" onClick={handleClick}>
+            Create
+          </Button>
+        }
+      />
       <Divider />
       <TableContainer>
         <Table>
