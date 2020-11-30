@@ -4,6 +4,7 @@ import {
   Card,
   CardHeader,
   Divider,
+  Link,
   Table,
   TableBody,
   TableCell,
@@ -38,14 +39,23 @@ const AllPosts = () => {
 
   const handleChangePage = (event, newPage) => setPage(() => newPage)
 
-  const handleClick = () => history.push('/dashboard/posts/create')
+  const handleCreate = () => history.push('/dashboard/posts/create')
+
+  const handleEdit = (id, slug) => () => {
+    history.push({
+      state: {
+        id
+      },
+      pathname: `/dashboard/posts/edit/${slug}`
+    })
+  }
 
   return (
     <Card>
       <CardHeader
         title="Posts"
         action={
-          <Button color="primary" variant="contained" onClick={handleClick}>
+          <Button color="primary" variant="contained" onClick={handleCreate}>
             Create
           </Button>
         }
@@ -63,15 +73,26 @@ const AllPosts = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {blogs.map(({ title, status, createdAt, updatedAt }, index) => (
-              <TableRow key={index}>
-                <TableCell component="td">{title}</TableCell>
-                <TableCell component="td">Agus Rdz</TableCell>
-                <TableCell component="td">{status}</TableCell>
-                <TableCell component="td">{createdAt}</TableCell>
-                <TableCell component="td">{updatedAt}</TableCell>
-              </TableRow>
-            ))}
+            {blogs.map(
+              ({ _id, title, status, createdAt, updatedAt, slug }, index) => (
+                <TableRow key={index}>
+                  <TableCell component="td">
+                    <Link
+                      variant="body1"
+                      color="inherit"
+                      to="#"
+                      onClick={handleEdit(_id, slug)}
+                    >
+                      {title}
+                    </Link>
+                  </TableCell>
+                  <TableCell component="td">Agus Rdz</TableCell>
+                  <TableCell component="td">{status}</TableCell>
+                  <TableCell component="td">{createdAt}</TableCell>
+                  <TableCell component="td">{updatedAt}</TableCell>
+                </TableRow>
+              )
+            )}
           </TableBody>
         </Table>
       </TableContainer>

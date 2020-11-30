@@ -22,9 +22,11 @@ const Header = () => {
   useEffect(() => {
     const url = location.pathname
     const paths = url.substring(1, url.length).split('/')
-    setCurrentPath(() => paths.pop())
+    setCurrentPath(() => textSanitize(paths.pop()))
     setBreadcrumbs(() => paths)
   }, [location])
+
+  const textSanitize = (text) => text.replace(/-/g, ' ')
 
   return (
     <Breadcrumbs
