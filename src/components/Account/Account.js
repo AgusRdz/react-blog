@@ -1,13 +1,5 @@
 import React, { Fragment, useRef, useState } from 'react'
-import {
-  Avatar,
-  Box,
-  ButtonBase,
-  Hidden,
-  Menu,
-  MenuItem,
-  Typography
-} from '@material-ui/core'
+import { Avatar, Box, ButtonBase, Menu, MenuItem } from '@material-ui/core'
 import { useHistory } from 'react-router'
 import useStyles from './useStyles'
 
@@ -38,11 +30,6 @@ const Account = () => {
         <Avatar alt="user" className={classes.avatar} src="/images/me.jpeg">
           A
         </Avatar>
-        <Hidden smDown>
-          <Typography variant="caption" component="span" color="inherit">
-            AgusRdz
-          </Typography>
-        </Hidden>
       </Box>
       <Menu
         onClose={handleClose}

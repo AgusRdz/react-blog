@@ -6,13 +6,13 @@ import {
   Toolbar,
   Typography
 } from '@material-ui/core'
-import { Menu } from '@material-ui/icons'
+import { Brightness7, Brightness4, Menu } from '@material-ui/icons'
 import clsx from 'clsx'
 import useStyles from './useStyles'
 import ScrollTop from 'components/ScrollTop'
 import { Link } from 'react-router-dom'
 
-const NavBar = ({ onDrawerOpen, open }) => {
+const NavBar = ({ onDrawerOpen, open, onThemeChange, darkModeOn }) => {
   const classes = useStyles()
 
   const handleDrawerOpen = () => onDrawerOpen()
@@ -30,6 +30,15 @@ const NavBar = ({ onDrawerOpen, open }) => {
           <Typography variant="h6" noWrap className={classes.title}>
             <Link to="/">AgusLog</Link>
           </Typography>
+          <IconButton
+            edge="end"
+            color="inherit"
+            aria-label="switch dark/light mode"
+            onClick={onThemeChange}
+          >
+            {darkModeOn && <Brightness7 />}
+            {!darkModeOn && <Brightness4 />}
+          </IconButton>
           <IconButton
             color="inherit"
             aria-label="open drawer"

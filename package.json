@@ -16,6 +16,7 @@
     "muuri": "^0.9.3",
     "react": "^16.13.1",
     "react-bottom-scroll-listener": "^4.1.0",
+    "react-cookie": "^4.0.3",
     "react-dom": "^16.13.1",
     "react-emoji-render": "^1.2.4",
     "react-perfect-scrollbar": "^1.5.8",

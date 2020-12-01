@@ -184,30 +184,37 @@ const PostForm = ({
               </FormHelperText>
             )}
           </FormControl>
-          <SunEditor
-            ref={editorRef}
-            name="content"
-            setOptions={{
-              height: 400,
-              width: '100%',
-              buttonList: [
-                ['undo', 'redo'],
-                ['font', 'fontSize', 'formatBlock'],
-                ['bold', 'underline', 'italic', 'strike'],
-                ['removeFormat'],
-                ['fontColor', 'hiliteColor'],
-                ['outdent', 'indent'],
-                ['align', 'horizontalRule', 'list', 'table'],
-                ['link', 'image', 'video'],
-                ['fullScreen', 'showBlocks'],
-                ['preview']
-              ],
-              placeholder: 'Blog content...'
-            }}
-            setContents={content}
-            onChange={handleEditorChange}
-            disable={archived}
-          />
+          <FormControl
+            variant="outlined"
+            size="small"
+            margin="normal"
+            fullWidth
+          >
+            <SunEditor
+              ref={editorRef}
+              name="content"
+              setOptions={{
+                height: 400,
+                width: '100%',
+                buttonList: [
+                  ['undo', 'redo'],
+                  ['font', 'fontSize', 'formatBlock'],
+                  ['bold', 'underline', 'italic', 'strike'],
+                  ['removeFormat'],
+                  ['fontColor', 'hiliteColor'],
+                  ['outdent', 'indent'],
+                  ['align', 'horizontalRule', 'list', 'table'],
+                  ['link', 'image', 'video'],
+                  ['fullScreen', 'showBlocks'],
+                  ['preview']
+                ],
+                placeholder: 'Blog content...'
+              }}
+              setContents={content}
+              onChange={handleEditorChange}
+              disable={archived}
+            />
+          </FormControl>
           <FormControl
             variant="outlined"
             size="small"
@@ -241,20 +248,20 @@ const PostForm = ({
             {blog && (
               <Button
                 color="default"
-                variant="outlined"
+                variant="contained"
                 type="button"
                 onClick={handleDelete}
                 disabled={isDeleting}
                 startIcon={<Delete />}
               >
-                Delete
+                Delete Permanently
               </Button>
             )}
             {isEditing && !archived && (
               <Fragment>
                 <Button
                   color="default"
-                  variant="outlined"
+                  variant="contained"
                   type="button"
                   onClick={handleArchive}
                   disabled={isDeleting}
@@ -266,8 +273,8 @@ const PostForm = ({
             )}
             {!archived && (
               <Button
-                color="secondary"
-                variant="outlined"
+                color="primary"
+                variant="contained"
                 disabled={isSubmitting}
                 type="submit"
                 startIcon={<Save />}

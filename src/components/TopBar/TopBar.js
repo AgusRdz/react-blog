@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   AppBar,
   Box,
@@ -6,13 +7,12 @@ import {
   SvgIcon,
   Toolbar
 } from '@material-ui/core'
-import { Menu } from '@material-ui/icons'
+import { Brightness4, Brightness7, Menu } from '@material-ui/icons'
 import Account from 'components/Account'
 import Logo from 'components/Logo'
-import React from 'react'
 import { Link } from 'react-router-dom'
 
-const TopBar = ({ onMobileOpen }) => {
+const TopBar = ({ onMobileOpen, onThemeChange, darkModeOn }) => {
   return (
     <AppBar>
       <Toolbar>
@@ -29,6 +29,17 @@ const TopBar = ({ onMobileOpen }) => {
           </Link>
         </Hidden>
         <Box ml={2} flexGrow={1} />
+        <Box ml={2}>
+          <IconButton
+            edge="end"
+            color="inherit"
+            aria-label="switch dark/light mode"
+            onClick={onThemeChange}
+          >
+            {darkModeOn && <Brightness7 />}
+            {!darkModeOn && <Brightness4 />}
+          </IconButton>
+        </Box>
         <Box ml={2}>
           <Account />
         </Box>

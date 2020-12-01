@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   grid: {
     position: 'relative',
     '& > div': {
@@ -9,7 +9,13 @@ const useStyles = makeStyles(() => ({
       width: 'calc(30% - 10px)',
       margin: 5,
       zIndex: 1,
-      color: '#fff'
+      color: '#fff',
+      [theme.breakpoints.only('sm')]: {
+        width: 'calc(50% - 10px)'
+      },
+      [theme.breakpoints.only('xs')]: {
+        width: '100%'
+      }
     },
     '& > div > div': {
       position: 'relative',
@@ -18,7 +24,9 @@ const useStyles = makeStyles(() => ({
     },
     '& img': {
       width: '100%',
-      height: 'auto'
+      height: 'auto',
+      paddingLeft: 10,
+      paddingRight: 10
     }
   },
   ellipsis: {
@@ -27,7 +35,8 @@ const useStyles = makeStyles(() => ({
     overflow: 'hidden',
     display: '-webkit-box',
     '-webkitLineClamp': 8,
-    '-webkitBoxOrient': 'vertical'
+    '-webkitBoxOrient': 'vertical',
+    paddingTop: 0
   },
   link: {
     textDecoration: 'none'

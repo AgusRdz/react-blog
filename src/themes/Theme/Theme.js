@@ -1,12 +1,18 @@
-const { createMuiTheme } = require('@material-ui/core')
+import { createMuiTheme } from '@material-ui/core'
 
 const Blog = createMuiTheme({
   palette: {
     primary: {
-      main: '#000'
+      light: '#757ce8',
+      main: '#64b5f6',
+      dark: '#2286c3',
+      contrastText: '#fafafa'
     },
-    action: {
-      main: 'red'
+    secondary: {
+      light: '#ffffff',
+      main: '#e3f2fd',
+      dark: '#b1bfca',
+      contrastText: '#000'
     }
   }
 })
