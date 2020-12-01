@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Breadcrumbs, Link, Typography, makeStyles } from '@material-ui/core'
+import { Breadcrumbs, Link, Typography } from '@material-ui/core'
 import { NavigateNext } from '@material-ui/icons'
 import { Link as RouterLink, useHistory } from 'react-router-dom'
+import useStyles from './useStyles'
 
-const useStyles = makeStyles(() => ({
-  breadcrumbs: {
-    padding: '25px 0',
-    '& li': {
-      textTransform: 'capitalize'
-    }
-  }
-}))
+const EXCLUSIONS = ['edit']
 
 const Header = () => {
   const classes = useStyles()
@@ -36,6 +30,14 @@ const Header = () => {
     >
       {breadcrumbs.map((text) => {
         composedPath = `${composedPath}/${text}`
+        if (EXCLUSIONS.includes(text)) {
+          return (
+            <Typography variant="body1" color="inherit">
+              {text}
+            </Typography>
+          )
+        }
+
         return (
           <Link
             key={text}

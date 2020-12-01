@@ -8,30 +8,14 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  ListItemText,
-  makeStyles
+  ListItemText
 } from '@material-ui/core'
 import { Book, Dashboard, Label } from '@material-ui/icons'
 import Logo from 'components/Logo'
 import React, { Fragment } from 'react'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import { Link as RouterLink, useHistory } from 'react-router-dom'
-
-const useStyles = makeStyles(() => ({
-  mobileDrawer: {
-    width: 256
-  },
-  desktopDrawer: {
-    width: 256,
-    top: 64,
-    height: 'calc(100% - 64px)'
-  },
-  avatar: {
-    cursor: 'pointer',
-    width: 64,
-    height: 64
-  }
-}))
+import useStyles from './useStyles'
 
 const sidebarConfig = [
   {
@@ -94,10 +78,10 @@ const SideBar = ({ openMobile, onMobileClose }) => {
         <Divider />
 
         <Box p={2} display="flex" justifyContent="center">
-          <List disablePadding component="nav" style={{ width: '100%' }}>
+          <List disablePadding component="nav" className={classes.w100}>
             {sidebarConfig.map(({ title, href, icon: Icon }, index) => (
               <ListItem button key={index}>
-                <ListItemIcon style={{ minWidth: 'fit-content' }}>
+                <ListItemIcon className={classes.minWidth}>
                   <Icon />
                 </ListItemIcon>
                 <ListItemText primary={title} onClick={handleClick(href)} />

@@ -80,27 +80,20 @@ const InfinitePosts = ({ posts }) => {
 
   return (
     <div ref={gridRef} className={classes.grid}>
-      {items.map(({ _id, title, cover, description, slug, updatedAt }) => (
+      {items.map(({ _id, title, category, description, slug, createdAt }) => (
         <div key={_id} data-id={_id}>
           <Fade in={true} unmountOnExit timeout={2000}>
             <Link to={`/blog/${slug}`} className={classes.link}>
-              <Card style={{ paddingBottom: 10 }}>
+              <Card>
                 <CardHeader title={title} />
                 <CardMedia component="div">
-                  <img
-                    src={
-                      cover
-                        ? `${process.env.REACT_APP_API_IMAGES_URL}${cover}`
-                        : '/images/not_found.png'
-                    }
-                    alt={title}
-                  />
+                  <img src={`/images/categories/${category}.png`} alt={title} />
                 </CardMedia>
                 <CardContent className={classes.ellipsis}>
                   <Fragment>
                     <div>{description}</div>
                     <div>
-                      By AgusRdz at <TimeForHumans date={updatedAt} />{' '}
+                      By AgusRdz at <TimeForHumans date={createdAt} />{' '}
                     </div>
                   </Fragment>
                 </CardContent>

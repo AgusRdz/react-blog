@@ -15,6 +15,7 @@ import {
 } from '@material-ui/core'
 import { BlogService } from 'services/api/blog'
 import { useHistory } from 'react-router'
+import { Create } from '@material-ui/icons'
 
 const AllPosts = () => {
   const history = useHistory()
@@ -55,7 +56,12 @@ const AllPosts = () => {
       <CardHeader
         title="Posts"
         action={
-          <Button color="primary" variant="contained" onClick={handleCreate}>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={handleCreate}
+            startIcon={<Create />}
+          >
             Create
           </Button>
         }

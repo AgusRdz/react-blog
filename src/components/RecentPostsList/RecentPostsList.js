@@ -25,7 +25,7 @@ const RecentPostsList = () => {
           'Apache vs Nginx',
           'Using Socket.io and React to build a real-time chat'
         ].map((text, index) => (
-          <ListItem button key={text}>
+          <ListItem button key={index}>
             <ListItemIcon className={classes.icon}>
               <LibraryBooks />
             </ListItemIcon>

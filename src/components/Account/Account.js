@@ -4,23 +4,12 @@ import {
   Box,
   ButtonBase,
   Hidden,
-  makeStyles,
   Menu,
   MenuItem,
   Typography
 } from '@material-ui/core'
 import { useHistory } from 'react-router'
-
-const useStyles = makeStyles((theme) => ({
-  avatar: {
-    height: 32,
-    width: 32,
-    marginRight: theme.spacing(1)
-  },
-  popover: {
-    width: 200
-  }
-}))
+import useStyles from './useStyles'
 
 const Account = () => {
   const classes = useStyles()

@@ -3,8 +3,10 @@ import PostForm from 'components/Forms/PostForm'
 import useToastContext from 'hooks/useToastContext'
 import React, { useCallback, useEffect, useState } from 'react'
 import { BlogService } from 'services/api/blog'
+import { useHistory } from 'react-router-dom'
 
 const EditPost = ({ location }) => {
+  const history = useHistory()
   const [blog, setBlog] = useState(null)
   const addToast = useToastContext()
   const {
@@ -57,7 +59,7 @@ const EditPost = ({ location }) => {
   }
 
   const handleArchive = async () => {
-    const { data, error = null } = await BlogService.destroy(id)
+    const { data, error = null } = await BlogService.archive(id)
 
     if (error) {
       addToast({ severity: 'error', message: error })
@@ -74,6 +76,18 @@ const EditPost = ({ location }) => {
     return data.blog
   }
 
+  const handleDelete = async () => {
+    const { error = null } = await BlogService.destroy(id)
+
+    if (error) {
+      addToast({ severity: 'error', message: error })
+
+      return false
+    }
+
+    history.push('/dashboard/posts')
+  }
+
   return (
     <Paper elevation={8}>
       <Card>
@@ -84,6 +98,7 @@ const EditPost = ({ location }) => {
             isEditing
             blog={blog}
             onArchive={handleArchive}
+            onDelete={handleDelete}
           />
         </CardContent>
       </Card>

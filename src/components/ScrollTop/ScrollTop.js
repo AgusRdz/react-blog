@@ -16,7 +16,7 @@ const ScrollTop = () => {
 
   const trigger = useScrollTrigger()
 
-  const handleClick = (e) => {
+  const handleClick = () => {
     if (anchor) {
       anchor.scrollIntoView({ behavior: 'smooth', block: 'center' })
     }
