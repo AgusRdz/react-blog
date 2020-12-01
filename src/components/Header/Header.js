@@ -28,11 +28,15 @@ const Header = () => {
       aria-label="breadcrumb"
       className={classes.breadcrumbs}
     >
-      {breadcrumbs.map((text) => {
+      {breadcrumbs.map((text, index) => {
         composedPath = `${composedPath}/${text}`
         if (EXCLUSIONS.includes(text)) {
           return (
-            <Typography variant="body1" color="inherit">
+            <Typography
+              key={`${text}-${index}`}
+              variant="body1"
+              color="inherit"
+            >
               {text}
             </Typography>
           )
@@ -40,7 +44,7 @@ const Header = () => {
 
         return (
           <Link
-            key={text}
+            key={`${text}-${index}`}
             variant="body1"
             color="inherit"
             to={composedPath}

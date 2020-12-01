@@ -12,6 +12,7 @@ import SideBar from 'components/SideBar'
 import Header from 'components/Header'
 import useStyles from './useStyles'
 import { useCookies } from 'react-cookie'
+import { ToastContextProvider } from 'contexts/ToastContext'
 
 const DashboardLayout = ({ children }) => {
   const classes = useStyles()
@@ -67,25 +68,27 @@ const DashboardLayout = ({ children }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className={classes.root}>
-        <CssBaseline />
-        <TopBar
-          onMobileOpen={handleMobileOpen}
-          onThemeChange={handleThemeChange}
-          darkModeOn={darkMode}
-        />
-        <SideBar onMobileClose={handleMobileClose} openMobile={isMobile} />
-        <div className={classes.wrapper}>
-          <div className={classes.contentContainer}>
-            <div className={classes.content}>
-              <Container maxWidth={false}>
-                <Header />
-                {children}
-              </Container>
+      <ToastContextProvider>
+        <div className={classes.root}>
+          <CssBaseline />
+          <TopBar
+            onMobileOpen={handleMobileOpen}
+            onThemeChange={handleThemeChange}
+            darkModeOn={darkMode}
+          />
+          <SideBar onMobileClose={handleMobileClose} openMobile={isMobile} />
+          <div className={classes.wrapper}>
+            <div className={classes.contentContainer}>
+              <div className={classes.content}>
+                <Container maxWidth={false}>
+                  <Header />
+                  {children}
+                </Container>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </ToastContextProvider>
     </ThemeProvider>
   )
 }
