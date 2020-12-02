@@ -1,6 +1,7 @@
-import React, { Fragment, useEffect, useRef, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import {
   Button,
+  Chip,
   FormControl,
   FormHelperText,
   InputLabel,
@@ -10,10 +11,14 @@ import {
 } from '@material-ui/core'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-import SunEditor from 'suneditor-react'
-import 'suneditor/dist/css/suneditor.min.css'
 import { Archive, Delete, Save } from '@material-ui/icons'
 import useStyles from './useStyles'
+import { Autocomplete } from '@material-ui/lab'
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css'
+
+// Quill.register('modules/imageUploader', ImageUploader)
+// yarn add quill-image-uploader
 
 const CATEGORIES = [
   { value: 'angular', text: 'Angular' },
@@ -41,7 +46,6 @@ const PostForm = ({
   onArchive,
   onDelete
 }) => {
-  const editorRef = useRef()
   const [content, setContent] = useState(null)
   const [isDeleting, setIsDeleting] = useState(false)
   const [archived, setArchived] = useState(false)
@@ -49,13 +53,14 @@ const PostForm = ({
 
   useEffect(() => {
     if (isEditing && blog) {
+      console.log(blog.content)
       setContent(() => blog.content)
       setArchived(() => blog.status === 'archived')
     }
   }, [isEditing, blog, archived])
 
-  const handleEditorChange = () => {
-    setContent(() => editorRef.current.editor.getContents())
+  const handleEditorChange = (value) => {
+    setContent(() => value)
   }
 
   const handleArchive = async () => {
@@ -190,31 +195,51 @@ const PostForm = ({
             margin="normal"
             fullWidth
           >
-            <SunEditor
-              ref={editorRef}
-              name="content"
-              setOptions={{
-                height: 400,
-                width: '100%',
-                buttonList: [
-                  ['undo', 'redo'],
-                  ['font', 'fontSize', 'formatBlock'],
-                  ['bold', 'underline', 'italic', 'strike'],
-                  ['removeFormat'],
-                  ['fontColor', 'hiliteColor'],
-                  ['outdent', 'indent'],
-                  ['align', 'horizontalRule', 'list', 'table'],
-                  ['link', 'image', 'video'],
-                  ['fullScreen', 'showBlocks'],
-                  ['preview']
-                ],
-                placeholder: 'Blog content...'
-              }}
-              setContents={content}
+            <ReactQuill
+              theme="snow"
+              defaultValue={content}
+              value={content}
+              modules={PostForm.modules}
+              formats={PostForm.formats}
+              bounds={'#editor'}
               onChange={handleEditorChange}
-              disable={archived}
+              className={classes.toolbar}
             />
           </FormControl>
+          <FormControl
+            variant="outlined"
+            size="small"
+            margin="normal"
+            fullWidth
+            disabled={archived}
+          >
+            <Autocomplete
+              name="category"
+              multiple
+              options={[].map((value) => value)}
+              defaultValue={[]}
+              freeSolo
+              renderTags={(value, getTagProps) =>
+                value.map((option, index) => (
+                  <Chip
+                    key={index}
+                    variant="outlined"
+                    label={option}
+                    {...getTagProps({ index })}
+                  />
+                ))
+              }
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label="Tags"
+                  size="small"
+                />
+              )}
+            />
+          </FormControl>
+
           <FormControl
             variant="outlined"
             size="small"
@@ -288,5 +313,38 @@ const PostForm = ({
     </Formik>
   )
 }
+
+// enable the toolbar functionality
+PostForm.modules = {
+  toolbar: [
+    ['bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block'],
+    [
+      { list: 'ordered' },
+      { list: 'bullet' },
+      { indent: '-1' },
+      { indent: '+1' }
+    ],
+    ['link', 'image', 'video']
+  ],
+  clipboard: {
+    matchVisual: false
+  }
+}
+
+// enable the format for each functionality
+PostForm.formats = [
+  'bold',
+  'italic',
+  'underline',
+  'strike',
+  'blockquote',
+  'code-block',
+  'list',
+  'bullet',
+  'indent',
+  'link',
+  'image',
+  'video'
+]
 
 export default PostForm

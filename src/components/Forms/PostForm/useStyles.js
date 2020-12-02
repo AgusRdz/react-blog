@@ -16,6 +16,11 @@ const useStyles = makeStyles((theme) => ({
   },
   hide: {
     display: 'none'
+  },
+  toolbar: {
+    '& .ql-toolbar': {
+      background: '#e0e0e0'
+    }
   }
 }))
 
