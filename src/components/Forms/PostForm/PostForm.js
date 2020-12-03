@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useCallback, useEffect, useState } from 'react'
 import {
   Button,
   Chip,
@@ -16,6 +16,8 @@ import useStyles from './useStyles'
 import { Autocomplete } from '@material-ui/lab'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
+import { useHistory } from 'react-router-dom'
+import { TagService } from 'services/api/tag'
 
 // Quill.register('modules/imageUploader', ImageUploader)
 // yarn add quill-image-uploader
@@ -49,19 +51,33 @@ const PostForm = ({
   const [content, setContent] = useState(null)
   const [isDeleting, setIsDeleting] = useState(false)
   const [archived, setArchived] = useState(false)
+  const [tags, setTags] = useState([])
+  const [selectedTags, setSelectedTags] = useState([])
+  const [category, setCategory] = useState('')
   const classes = useStyles()
+  const history = useHistory()
+
+  const fetchTags = useCallback(async () => {
+    const { data, error = null } = await TagService.index()
+    if (error) return
+    setTags(() => data.tags)
+  }, [])
 
   useEffect(() => {
     if (isEditing && blog) {
-      console.log(blog.content)
-      setContent(() => blog.content)
-      setArchived(() => blog.status === 'archived')
+      const { content, tags, status, category } = blog
+      setContent(() => content)
+      setSelectedTags(() => tags || [])
+      setArchived(() => status === 'archived')
+      setCategory(() => category)
     }
   }, [isEditing, blog, archived])
 
-  const handleEditorChange = (value) => {
-    setContent(() => value)
-  }
+  useEffect(() => {
+    fetchTags()
+  }, [fetchTags])
+
+  const handleEditorChange = (value) => setContent(() => value)
 
   const handleArchive = async () => {
     setIsDeleting(() => true)
@@ -78,6 +94,11 @@ const PostForm = ({
     await onDelete()
   }
 
+  const handleTagsChange = (e, value) => setSelectedTags(() => value)
+
+  const handleCategoryChange = (e, value) =>
+    setCategory(() => value.toLowerCase())
+
   return (
     <Formik
       enableReinitialize={true}
@@ -85,7 +106,8 @@ const PostForm = ({
         title: isEditing && blog ? blog.title : '',
         description: isEditing && blog ? blog.description : '',
         status: isEditing && blog ? blog.status : 'draft',
-        category: isEditing && blog ? blog.category : ''
+        category: isEditing && blog ? blog.category : '',
+        tags: isEditing && blog ? blog.tags : []
       }}
       validationSchema={Yup.object().shape({
         title: Yup.string().max(150).required('Title is required'),
@@ -104,12 +126,16 @@ const PostForm = ({
       ) => {
         try {
           values.content = content || ''
+          values.tags = selectedTags || null
+          values.category = category || ''
           const result = await onSubmit(values)
 
           if (result) {
             if (!isEditing) {
+              setSelectedTags(() => [])
               setContent(() => null)
               resetForm()
+              history.push('/dashboard/posts')
             }
           }
         } catch (error) {
@@ -167,22 +193,25 @@ const PostForm = ({
             fullWidth
             disabled={archived}
           >
-            <InputLabel id="category">Category</InputLabel>
-            <Select
+            <Autocomplete
               name="category"
-              labelId="category"
-              label="Category"
-              value={values.category}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={Boolean(touched.category && errors.category)}
-            >
-              {CATEGORIES.map(({ value, text }, index) => (
-                <MenuItem key={index} value={value}>
-                  {text}
-                </MenuItem>
-              ))}
-            </Select>
+              onChange={handleCategoryChange}
+              options={CATEGORIES.map(({ text }) => text)}
+              value={
+                (category &&
+                  CATEGORIES.filter(({ value, text }) => category === value)[0]
+                    .text) ||
+                ''
+              }
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Categories"
+                  variant="outlined"
+                  size="small"
+                />
+              )}
+            />
             {Boolean(touched.category && errors.category) && (
               <FormHelperText className="Mui-error">
                 {touched.category && errors.category}
@@ -214,10 +243,11 @@ const PostForm = ({
             disabled={archived}
           >
             <Autocomplete
-              name="category"
+              name="tags"
               multiple
-              options={[].map((value) => value)}
-              defaultValue={[]}
+              onChange={handleTagsChange}
+              options={tags.map((value) => value)}
+              value={selectedTags}
               freeSolo
               renderTags={(value, getTagProps) =>
                 value.map((option, index) => (
@@ -239,7 +269,6 @@ const PostForm = ({
               )}
             />
           </FormControl>
-
           <FormControl
             variant="outlined"
             size="small"

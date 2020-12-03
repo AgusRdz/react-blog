@@ -6,5 +6,6 @@ export const BlogService = {
   update: (id, params) => put(`/blogs/${id}`, params),
   destroy: (id) => destroy(`/blogs/${id}`),
   edit: (id) => get(`/blogs/${id}`),
+  show: (slug) => get(`/blogs/${slug}/show`),
   archive: (id) => destroy(`/blogs/${id}/archive`)
 }

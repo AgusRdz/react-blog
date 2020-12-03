@@ -2,7 +2,6 @@ const { makeStyles } = require('@material-ui/core')
 
 const useStyles = makeStyles(() => ({
   footer: {
-    background: '#ececec',
     width: '100%',
     position: 'absolute',
     bottom: 0,
