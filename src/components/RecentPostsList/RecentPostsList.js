@@ -1,5 +1,6 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useCallback, useEffect, useState } from 'react'
 import {
+  Link,
   List,
   ListItem,
   ListItemIcon,
@@ -8,9 +9,24 @@ import {
 } from '@material-ui/core'
 import { LibraryBooks } from '@material-ui/icons'
 import useStyles from './useStyles'
+import { HomeService } from 'services/api/home'
+import { Link as RouterLink } from 'react-router-dom'
 
 const RecentPostsList = () => {
   const classes = useStyles()
+  const [blogs, setBlogs] = useState([])
+
+  const fetchRecentPosts = useCallback(async () => {
+    const { data, error = null } = await HomeService.latest()
+
+    if (error) return
+
+    setBlogs(() => data.blogs)
+  }, [])
+
+  useEffect(() => {
+    fetchRecentPosts()
+  }, [])
 
   return (
     <Fragment>
@@ -18,23 +34,25 @@ const RecentPostsList = () => {
         Latest Blogs
       </Typography>
       <List>
-        {[
-          'How to create a custom blog with react?',
-          'Using Query Scopes in Laravel 7',
-          'ECMA 6 best practices',
-          'Apache vs Nginx',
-          'Using Socket.io and React to build a real-time chat'
-        ].map((text, index) => (
-          <ListItem button key={index}>
-            <ListItemIcon className={classes.icon}>
-              <LibraryBooks />
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
+        {blogs.map(({ _id, title, slug }) => (
+          <Link
+            component={RouterLink}
+            to={`/blog/${slug}`}
+            color="textPrimary"
+            underline="none"
+            key={_id}
+          >
+            <ListItem button>
+              <ListItemIcon className={classes.icon}>
+                <LibraryBooks />
+              </ListItemIcon>
+              <ListItemText primary={title} />
+            </ListItem>
+          </Link>
         ))}
       </List>
     </Fragment>
   )
 }
 
-export default RecentPostsList
+export default React.memo(RecentPostsList)
