@@ -43,7 +43,9 @@ const CustomDrawer = ({ onClose, open }) => {
       </Typography>
       <RecentPostsList />
       <Divider />
-      <TagsList />
+      <TagsList
+        tags={['react', 'js', 'php', 'docker', 'aws', 'laravel', 'javascript']}
+      />
     </Drawer>
   )
 }

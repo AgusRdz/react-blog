@@ -14,13 +14,53 @@ import * as Yup from 'yup'
 import { Archive, Delete, Save } from '@material-ui/icons'
 import useStyles from './useStyles'
 import { Autocomplete } from '@material-ui/lab'
+import hljs from 'utils/highlight'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { useHistory } from 'react-router-dom'
 import { TagService } from 'services/api/tag'
+import 'styles/monokai-sublime.css'
 
 // Quill.register('modules/imageUploader', ImageUploader)
 // yarn add quill-image-uploader
+
+const modules = {
+  toolbar: [
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block'],
+    [
+      { list: 'ordered' },
+      { list: 'bullet' },
+      { indent: '-1' },
+      { indent: '+1' }
+    ],
+    ['link', 'image', 'video'],
+    [{ size: ['small', false, 'large'] }],
+    ['clean']
+  ],
+  clipboard: {
+    matchVisual: false
+  },
+  syntax: { highlight: (text) => hljs.highlightAuto(text).value }
+}
+
+const formats = [
+  'header',
+  'font',
+  'size',
+  'bold',
+  'italic',
+  'underline',
+  'strike',
+  'blockquote',
+  'list',
+  'bullet',
+  'indent',
+  'link',
+  'image',
+  'video',
+  'code-block'
+]
 
 const CATEGORIES = [
   { value: 'angular', text: 'Angular' },
@@ -228,8 +268,8 @@ const PostForm = ({
               theme="snow"
               defaultValue={content}
               value={content}
-              modules={PostForm.modules}
-              formats={PostForm.formats}
+              modules={modules}
+              formats={formats}
               bounds={'#editor'}
               onChange={handleEditorChange}
               className={classes.toolbar}
@@ -342,38 +382,5 @@ const PostForm = ({
     </Formik>
   )
 }
-
-// enable the toolbar functionality
-PostForm.modules = {
-  toolbar: [
-    ['bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block'],
-    [
-      { list: 'ordered' },
-      { list: 'bullet' },
-      { indent: '-1' },
-      { indent: '+1' }
-    ],
-    ['link', 'image', 'video']
-  ],
-  clipboard: {
-    matchVisual: false
-  }
-}
-
-// enable the format for each functionality
-PostForm.formats = [
-  'bold',
-  'italic',
-  'underline',
-  'strike',
-  'blockquote',
-  'code-block',
-  'list',
-  'bullet',
-  'indent',
-  'link',
-  'image',
-  'video'
-]
 
 export default PostForm
