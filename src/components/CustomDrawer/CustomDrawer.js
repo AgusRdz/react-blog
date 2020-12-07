@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { IconButton, Typography, useTheme } from '@material-ui/core'
+import { IconButton, Typography, useTheme, Link } from '@material-ui/core'
 import Divider from '@material-ui/core/Divider'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
@@ -7,7 +7,7 @@ import Drawer from '@material-ui/core/Drawer'
 import useStyles from './useStyles'
 import RecentPostsList from 'components/RecentPostsList'
 import TagsList from 'components/TagsList'
-import { Link, Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 import Emoji from 'react-emoji-render'
 import { TagService } from 'services/api/tag'
 
@@ -50,7 +50,7 @@ const CustomDrawer = ({ onClose, open }) => {
       </div>
       <Divider />
       <Typography variant="h6" component="span" className={classes.header}>
-        <Link to="/whoami">
+        <Link to="/whoami" component={RouterLink} underline="none">
           <Emoji text=":sunglasses: whoami" />
         </Link>
       </Typography>

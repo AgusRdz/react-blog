@@ -26,7 +26,7 @@ const RecentPostsList = () => {
 
   useEffect(() => {
     fetchRecentPosts()
-  }, [])
+  }, [fetchRecentPosts])
 
   return (
     <Fragment>
