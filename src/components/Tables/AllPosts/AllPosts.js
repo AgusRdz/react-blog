@@ -16,8 +16,10 @@ import {
 import { BlogService } from 'services/api/blog'
 import { useHistory } from 'react-router'
 import { Create } from '@material-ui/icons'
+import useIsMounted from 'hooks/useIsMounted'
 
 const AllPosts = () => {
+  const isMounted = useIsMounted()
   const history = useHistory()
   const [blogs, setBlogs] = useState([])
   const [total, setTotal] = useState(0)
@@ -25,6 +27,7 @@ const AllPosts = () => {
   const rowsPerPage = 10
 
   const fetchBlogs = useCallback(async () => {
+    if (!isMounted.current) return
     const { data, error } = await BlogService.index(page)
     if (error) {
       return console.log(error)
@@ -32,7 +35,7 @@ const AllPosts = () => {
 
     setBlogs(() => data.blogs)
     setTotal(() => data.total)
-  }, [page])
+  }, [page, isMounted])
 
   useEffect(() => {
     fetchBlogs()

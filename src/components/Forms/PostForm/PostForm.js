@@ -96,6 +96,7 @@ const PostForm = ({
   const [category, setCategory] = useState('')
   const classes = useStyles()
   const history = useHistory()
+  const [categoryTouched, setCategoryTouched] = useState(false)
 
   const fetchTags = useCallback(async () => {
     const { data, error = null } = await TagService.index()
@@ -139,15 +140,15 @@ const PostForm = ({
   const handleCategoryChange = (e, value) =>
     setCategory(() => value.toLowerCase())
 
+  const handleCategoryBlur = () => setCategoryTouched(() => true)
+
   return (
     <Formik
       enableReinitialize={true}
       initialValues={{
         title: isEditing && blog ? blog.title : '',
         description: isEditing && blog ? blog.description : '',
-        status: isEditing && blog ? blog.status : 'draft',
-        category: isEditing && blog ? blog.category : '',
-        tags: isEditing && blog ? blog.tags : []
+        status: isEditing && blog ? blog.status : 'draft'
       }}
       validationSchema={Yup.object().shape({
         title: Yup.string().max(150).required('Title is required'),
@@ -157,8 +158,7 @@ const PostForm = ({
             ['draft', 'published'],
             'Status must be one of the following values: Draft, Published'
           )
-          .required('Status is required'),
-        category: Yup.string().required('Category is required')
+          .required('Status is required')
       })}
       onSubmit={async (
         values,
@@ -236,6 +236,7 @@ const PostForm = ({
             <Autocomplete
               name="category"
               onChange={handleCategoryChange}
+              onBlur={handleCategoryBlur}
               options={CATEGORIES.map(({ text }) => text)}
               value={
                 (category &&
@@ -252,9 +253,9 @@ const PostForm = ({
                 />
               )}
             />
-            {Boolean(touched.category && errors.category) && (
+            {Boolean(categoryTouched && category === '') && (
               <FormHelperText className="Mui-error">
-                {touched.category && errors.category}
+                Category is required
               </FormHelperText>
             )}
           </FormControl>

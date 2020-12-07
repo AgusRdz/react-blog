@@ -1,6 +1,6 @@
 import React from 'react'
 import withAuth from 'hocs/WithAuth'
-import DashboardStatistics from 'components/DashboardStatistics/DashboardStatistics'
+import DashboardStatistics from 'components/DashboardStatistics'
 
 const Dashboard = () => {
   return (
